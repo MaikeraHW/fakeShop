@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Layout from './assets/components/layout/Layout'
 import Home from './assets/pages/Home'
-import Produtos from './assets/pages/Produtos'
+import ProdutosSuspense from './assets/pages/ProdutosSuspense'
 import ProdutosDetalhes from './assets/pages/ProdutosDetalhes'
 
 
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>} />
-          <Route path="produtos" element={<Produtos/>} />
+          <Route path="produtos" element={<ProdutosSuspense/>} />
           <Route path="produtos/:id" element={<ProdutosDetalhes/>} />
         </Route>
       </Routes>
