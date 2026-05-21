@@ -23,7 +23,7 @@ function ProdutoBody({produtoDetalhadoPromise}){
                     <span className={styles.category}>{produto.category}</span>
                     <h1 className={styles.title}>{produto.title}</h1>
                     <p className={styles.description}>{produto.description}</p>
-                    <p className={styles.price}>{produto.price.toFixed(2).replace(".",",")}</p>
+                    <p className={styles.price}>R$ {produto.price.toFixed(2).replace(".",",")}</p>
                     <button className={styles.button}>Adicionar ao Carrinho</button>
                 </div>
             </div>
@@ -33,7 +33,9 @@ function ProdutoBody({produtoDetalhadoPromise}){
 function ProdutosDetalhesSuspense(){
 
     const { id } = useParams()
-    const produtoDetalhadoPromise = fetch(`https://fakestoreapi.com/products/${id}`).then( res => res.json())
+    const produtoDetalhadoPromise = useMemo( () => {
+        return ( fetch(`https://fakestoreapi.com/products/${id}`).then( res => res.json()) )
+    })
 
     return(
         <article className={styles.container}>
