@@ -1,6 +1,8 @@
 import { Suspense, use } from "react"
 import { Link } from "react-router-dom"
 
+import ProdutosSkeleton from '../components/produtosSkeleton/ProdutosSkeleton'
+
 import styles from './Produtos.module.css'
 
 
@@ -31,7 +33,7 @@ function Produtos(){
     return(
         <section>
             <h2>Nossos Produtos</h2>
-            <Suspense fallback={<p>Carregando...</p>}>
+            <Suspense fallback={<ProdutosSkeleton />}>
                 <ProdutoInfo/>
             </Suspense>
             
