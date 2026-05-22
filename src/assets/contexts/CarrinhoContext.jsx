@@ -29,6 +29,7 @@ export function CarrinhoProvider({children}){
     }
 
     const atualizarCarrinho= (id, novaQuantidade) => {
+        if (novaQuantidade < 1) return
         setItens(prev => prev.map( item => {
             return item.id === id ? {...item, quantidade: novaQuantidade} : item
         }))
