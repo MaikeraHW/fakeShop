@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 
 const CarrinhoContext = createContext()
@@ -18,7 +18,9 @@ export function CarrinhoProvider({children}){
         alert(`O produto com Id ${produto.id} foi adicionado ao carrinho`)
     }
 
-    return <CarrinhoContext.Provider>
+    const totalItens = itens.reduce( (acc, item) => acc + item.quantidade, 0)
+
+    return <CarrinhoContext.Provider value={{adicionarCarrinho, totalItens, itens}}>
                 {children}
            </CarrinhoContext.Provider>
 

@@ -1,7 +1,8 @@
-import { use, Suspense } from 'react'
+import { use, Suspense, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ProdutosDetalhes.module.css'
 import { useParams } from 'react-router-dom'
+import { useCarrinho } from '../contexts/CarrinhoContext'
 
     
     
@@ -9,6 +10,12 @@ import { useParams } from 'react-router-dom'
 function ProdutoBody({produtoDetalhadoPromise}){
     
     const produto = use(produtoDetalhadoPromise)
+
+    const {adicionarCarrinho} = useCarrinho()
+
+    function handleAdicionar(){
+        console.log(produto)
+    }
 
     if(!produto) return <div>Produto não encontrado</div>
 
@@ -24,7 +31,7 @@ function ProdutoBody({produtoDetalhadoPromise}){
                     <h1 className={styles.title}>{produto.title}</h1>
                     <p className={styles.description}>{produto.description}</p>
                     <p className={styles.price}>R$ {produto.price.toFixed(2).replace(".",",")}</p>
-                    <button className={styles.button}>Adicionar ao Carrinho</button>
+                    <button className={styles.button} onClick={handleAdicionar}>Adicionar ao Carrinho</button>
                 </div>
             </div>
     )

@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useCarrinho } from "../../contexts/CarrinhoContext";
 import styles from './Header.module.css'
 
 function Header(){
+
+    const {totalItens} = useCarrinho()
 
     return(
 
@@ -14,6 +17,9 @@ function Header(){
                         </li>
                         <li>
                             <NavLink to="/produtos" className={({isActive}) => isActive ? styles.active : ""}> Produtos </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/carrinho" > Carrinho <span>{totalItens}</span> </NavLink>
                         </li>
                     </ul>
                 </nav>

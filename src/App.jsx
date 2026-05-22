@@ -4,6 +4,7 @@ import Layout from './assets/components/layout/Layout'
 import Home from './assets/pages/Home'
 import ProdutosSuspense from './assets/pages/ProdutosSuspense'
 import ProdutosDetalhesSuspense from './assets/pages/ProdutosDetalhesSuspense'
+import Carrinho from './assets/pages/Carrinho'
 
 
 import './App.css'
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Home/>} />
           <Route path="produtos" element={<ProdutosSuspense/>} />
           <Route path="produtos/:id" element={<ProdutosDetalhesSuspense/>} />
+          <Route path="carrinho" element={<Carrinho/>} />
         </Route>
       </Routes>
     </BrowserRouter>
