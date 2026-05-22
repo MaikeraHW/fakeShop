@@ -35,11 +35,15 @@ export function CarrinhoProvider({children}){
         }))
     }
 
+    const limparCarrinho = () => {
+        setItens([])
+    }
+
     const valorTotal = itens.reduce( (acc, item) => acc + (item.price * item.quantidade), 0)
 
     const totalItens = itens.reduce( (acc, item) => acc + item.quantidade, 0)
 
-    return <CarrinhoContext.Provider value={{adicionarCarrinho, removerCarrinho, atualizarCarrinho, valorTotal, totalItens, itens}}>
+    return <CarrinhoContext.Provider value={{adicionarCarrinho, removerCarrinho, atualizarCarrinho, limparCarrinho, valorTotal, totalItens, itens}}>
                 {children}
            </CarrinhoContext.Provider>
 

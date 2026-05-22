@@ -6,7 +6,7 @@ import { useState } from "react"
 
 function Carrinho(){
 
-    const {itens, atualizarCarrinho, removerCarrinho, valorTotal} = useCarrinho()
+    const {itens, atualizarCarrinho, removerCarrinho, valorTotal, limparCarrinho} = useCarrinho()
 
     const[idParaExcluir, setIdParaExcluir] = useState(null)
     const [itemParaConfirmar, setItemParaConfirmar] = useState(null)
@@ -18,6 +18,38 @@ function Carrinho(){
             removerCarrinho(id)
             setIdParaExcluir(null)
         }, 500)
+    }
+
+    async function finalizarCompra(){
+
+        const dadosParaEnvio = {
+            userId: 5,
+            date: new Date().getTime(),
+            products: itens.map( item => ({
+                productId: item.id,
+                quantity: item.quantidade
+            }))
+        }
+
+        try {
+
+            const response = await fetch("https://fakestoreapi.com/carts", {
+                method: "POST",
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body: JSON.stringify(dadosParaEnvio)
+            })
+
+            if(response.ok){
+                const resultado = await response.json()
+                alert("Pedido enviado com sucesso")
+                limparCarrinho()
+            }
+
+        } catch (err){
+            console.error(err)
+        } 
     }
 
     if(itens.length === 0) {
@@ -64,7 +96,7 @@ function Carrinho(){
                 <section className={styles.totalValue}>
                     <h2>Resumo</h2>
                     <p>Total: <b>{valorTotal.toFixed(2).replace("." , ",")}</b></p>
-                    <button className={styles.checkoutBtn}> Finalizar compra </button>
+                    <button className={styles.checkoutBtn} onClick={finalizarCompra}> Finalizar compra </button>
                 </section>
 
             </div>
