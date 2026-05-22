@@ -19,7 +19,7 @@ function Header(){
                             <NavLink to="/produtos" className={({isActive}) => isActive ? styles.active : ""}> Produtos </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/carrinho" > Carrinho <span>{totalItens}</span> </NavLink>
+                            <NavLink to="/carrinho" > Carrinho <span key={totalItens} className={styles.badge}>{totalItens}</span> </NavLink>
                         </li>
                     </ul>
                 </nav>

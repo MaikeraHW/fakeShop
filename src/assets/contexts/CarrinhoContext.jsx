@@ -24,9 +24,21 @@ export function CarrinhoProvider({children}){
         })
     }
 
+    const removerCarrinho = (id) => {
+        setItens(prev => prev.filter( item => item.id !== id))
+    }
+
+    const atualizarCarrinho= (id, novaQuantidade) => {
+        setItens(prev => prev.map( item => {
+            return item.id === id ? {...item, quantidade: novaQuantidade} : item
+        }))
+    }
+
+    const valorTotal = itens.reduce( (acc, item) => acc + (item.price * item.quantidade), 0)
+
     const totalItens = itens.reduce( (acc, item) => acc + item.quantidade, 0)
 
-    return <CarrinhoContext.Provider value={{adicionarCarrinho, totalItens, itens}}>
+    return <CarrinhoContext.Provider value={{adicionarCarrinho, removerCarrinho, atualizarCarrinho, valorTotal, totalItens, itens}}>
                 {children}
            </CarrinhoContext.Provider>
 
